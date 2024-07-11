@@ -5,6 +5,7 @@ import { useState } from "react";
 import { handleInitialLoad } from "./store/main-store/main.action";
 import LoadingFallback from "./components/LoadingFallback";
 import LoginPage from "./pages/auth/LoginPage";
+import RegisterPage from "./pages/auth/register";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -20,6 +21,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
       </Routes>
     </BrowserRouter>
   );

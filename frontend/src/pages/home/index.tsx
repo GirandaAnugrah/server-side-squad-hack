@@ -88,7 +88,7 @@ const HomePage = () => {
           <OfferingCard />
         </div>
       </div>
-      <div className="bg-darkgray-main py-24 px-16 text-white-main md:grid grid-cols-2 mt-32">
+      <div className="bg-darkgray-main py-24 px-16 text-white-main md:grid grid-cols-2 mt-32 devide-x">
         <div className="flex flex-col gap-10">
           <h1 className="text-5xl font-bold">
             All-in-one resource for disabled job seekers
