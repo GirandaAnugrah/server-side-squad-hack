@@ -8,11 +8,13 @@ import {
   CookingPot,
   GraduationCap,
   Home,
+  MoveRight,
   Music4,
   PhoneCall,
 } from "lucide-react";
 import OfferingCard from "../../components/OfferingCard";
 import Button from "../../components/Button";
+import UserCard from "../../components/UserCard";
 import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
@@ -26,7 +28,7 @@ const HomePage = () => {
             <h1 className="text-6xl font-bold">
               <span className="text-primary-main">Accessible</span> Jobs for All
             </h1>
-            <p>
+            <p className="text-color-text">
               Empowering individuals with disabilities by connecting them to
               meaningful employment opportunities.
             </p>
@@ -34,11 +36,20 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-      <div className=" pt-16 md:pt-0 px-2 lg:px-40 mb-10">
-        <h2 className="text-5xl font-bold px-5 mb-6">
+      <div className="pt-16 md:pt-0 px-2 lg:px-40 mb-10">
+        <div className="flex justify-between">
+          <h2 className="text-5xl font-bold px-5 mb-12">
           Explore by <span className="text-primary-main">Category</span>
-        </h2>
-        <div className="grid md:grid-cols-4 gap-2 md:gap-10">
+          </h2>
+          <div className="flex">
+            <p className="text-lg font-medium text-primary-main">Show all job seekers</p>
+            <MoveRight className="mx-2 w-6 text-primary-main  " />
+            </div>
+        </div>
+        
+        
+        
+        <div className="grid sm:grid-cols-4 gap-2 sm:gap-10">
           <CustomCategory
             icon={<GraduationCap className="w-12 h-12 text-primary-main" />}
             title="Teaching"
@@ -74,14 +85,13 @@ const HomePage = () => {
             title="Customer Service"
             employers="255"
           />
-          <CustomCategory title="Find employers" />
         </div>
       </div>
-      <div className="md:flex justify-between pt-20">
-        <div className="flex flex-col justify-center items-start ms-2 w-2/3">
+      <div className="xl:flex justify-between pt-20 mx-32">
+        <div className="flex flex-col justify-center items-start w-2/3">
           <div>
-            <h1 className="text-lg font-bold text-primary-main">EqualPath</h1>
-            <h1 className="text-4xl font-bold">What we Offer</h1>
+            <h1 className="text-lg font-regular tracking-widest text-primary-main">EqualPath</h1>
+            <h1 className="text-5xl pt-2 font-bold">What we offer</h1>
           </div>
         </div>
         <div className="grid md:grid-cols-3 gap-10">
@@ -116,6 +126,7 @@ const HomePage = () => {
             jobs that match their abilities and specializations.
           </p>
         </div>
+        
         <div className="flex flex-col gap-10">
           <h1 className="text-5xl font-bold">Register Now</h1>
           <p>
@@ -135,6 +146,7 @@ const HomePage = () => {
         </div>
       </div>
     </MainLayout>
+    
   );
 };
 

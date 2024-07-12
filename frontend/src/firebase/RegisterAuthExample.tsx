@@ -6,6 +6,7 @@ import { Education } from './enums/Education';
 
 // Interface for the initial state of Candidates
 const initialCandidateState: Candidates = {
+    uid: '',
     fullName: '',
     email: '',
     password: '',
@@ -28,6 +29,7 @@ const initialCandidateState: Candidates = {
 
 // Interface for the initial state of Recruiters
 const initialRecruiterState: Recruiters = {
+    uid: '',
     fullName: '',
     email: '',
     password: '',

@@ -8,7 +8,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Navbar hideButton={false} />
-      <div className="w-full">{children}</div>
+      <div className="w-full bg-broken-white">{children}</div>
       <Footer />
       {/* <AlertError /> */}
     </>

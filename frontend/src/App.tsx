@@ -1,5 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/home";
+import FindPage from "./pages/find/find";
+import ProfilePage from "./pages/profile/profile";
 import { useAppDispatch, useAppSelector } from "./hooks/useRedux";
 import { useEffect, useState } from "react";
 import { handleInitialLoad } from "./store/main-store/main.action";
@@ -43,6 +45,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/find" element={<FindPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/find-employee" element={<FindEmployee />} />
         <Route path="/detail-user/:id" element={<DetailUser />} />

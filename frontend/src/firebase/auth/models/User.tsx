@@ -3,6 +3,7 @@ import { Education } from "../../enums/Education";
 import { UserRoles } from "./UserRoles";
 
 export interface Users {
+    uid: string;
     fullName: string;
     email: string;
     password: string;
