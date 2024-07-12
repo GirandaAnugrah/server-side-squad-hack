@@ -3,7 +3,6 @@ import { Education } from "../../enums/Education";
 import { UserRoles } from "./UserRoles";
 
 export interface Users {
-    uid: string;
     fullName: string;
     email: string;
     password: string;
@@ -14,6 +13,7 @@ export interface Users {
     district: string;
     street: string;
     role: UserRoles;
+    imageLink: string | null;
 }
 
 
