@@ -13,6 +13,7 @@ export interface Users {
     district: string;
     street: string;
     role: UserRoles;
+    imageLink: string | null;
 }
 
 

@@ -10,6 +10,7 @@ import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/register";
 import useAuthListener from "./firebase/auth/hooks/useAuthListener";
 import { auth } from "./firebase/Firebase";
+import { RegisterPageTest } from "./pages/auth/register/RegisterPageTest";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -45,6 +46,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/find" element={<FindPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/register2" element={<RegisterPageTest />} />
       </Routes>
     </BrowserRouter>
   );
