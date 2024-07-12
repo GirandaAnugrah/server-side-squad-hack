@@ -1,6 +1,26 @@
+import { User } from "firebase/auth";
+import { Candidates, Recruiters } from "../firebase/auth/models/User";
+import { UserRoles } from "../firebase/auth/models/UserRoles";
+
 export interface MainSlice {
 	initialLoad: boolean;
+	userData: Recruiters | Candidates | null;
+	masterUser: Users | null;
+	userNow: string;
 
+}
+
+export interface Users {
+    fullName: string;
+    email: string;
+    password: string;
+    phoneNumber: string;
+    birthdate: string;
+    gender: boolean;
+    province: string;
+    district: string;
+    street: string;
+    role: UserRoles;
 }
 
 export interface LoginData {
@@ -19,4 +39,14 @@ export interface PersonalData {
 	district: string;
 	streetName: string;
 	confirmPassword: string;
+	role: string;
+	minimumWage: number;
+	maximumWage: number;
+	description: string;
+	skils: string[];
+	deficiency: string[];
+	education: string;
+	jobPosition: string;
+	firstJob: string;
+	secJob: string;
 }

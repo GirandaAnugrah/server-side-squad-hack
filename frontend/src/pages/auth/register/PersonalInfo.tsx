@@ -1,20 +1,42 @@
-import { FieldErrors, UseFormRegister } from "react-hook-form";
+import {
+  Control,
+  Controller,
+  FieldErrors,
+  UseFormRegister,
+  UseFormSetValue,
+} from "react-hook-form";
 import Button from "../../../components/Button";
 import InputText from "../../../components/InputText";
 import ProgressBar from "../../../components/ProgressBar";
 import { PersonalData } from "../../../typings/data";
 import React from "react";
+import ReactSelectWithLabel from "../../../components/ReactSelectWithLabel";
+
+const OPTION_GENDER = [
+  {
+    label: "Male",
+    value: "male",
+  },
+  {
+    label: "Female",
+    value: "female",
+  },
+];
 
 interface PersonalInfoProps {
   register: UseFormRegister<PersonalData>;
   errors: FieldErrors<PersonalData>;
   nextpage: React.Dispatch<React.SetStateAction<number>>;
+  control: Control<PersonalData, any>;
+  setValue: UseFormSetValue<PersonalData>;
 }
 
 const PersonalInfo: React.FC<PersonalInfoProps> = ({
   register,
   errors,
   nextpage,
+  control,
+  setValue,
 }) => {
   return (
     <>
@@ -26,7 +48,7 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({
         <div className="border-b-[1px] border-b-darkgray-main py-3 mb-3">
           <h3 className="text-xl font-bold">Biodata</h3>
         </div>
-        <form className="flex flex-col gap-4" onSubmit={() => nextpage(2)}>
+        <form className="flex flex-col gap-4" onSubmit={() => nextpage(3)}>
           <InputText
             labelname="Full Name"
             errMsg={errors.fullName?.message}
@@ -48,12 +70,28 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({
               required: "Age is Required",
             })}
           />
-          <InputText
-            labelname="Gender"
-            errMsg={errors.gender?.message}
-            {...register("gender", {
-              required: "Gender is Required",
-            })}
+          <Controller
+            control={control}
+            name="gender"
+            shouldUnregister
+            rules={{
+              required: "Gender must be filled",
+            }}
+            render={({ field: { onChange, value } }) => (
+              <ReactSelectWithLabel
+                label="Gender"
+                getOptionLabel={(opt) => opt.label}
+                getOptionValue={(opt) => opt.value}
+                value={OPTION_GENDER.find((opt) => opt.value === value)}
+                options={OPTION_GENDER}
+                onChange={(opt) => {
+                  setValue("gender", opt?.value.toString() || "");
+                  onChange(opt?.value.toString());
+                }}
+                className="mt-4"
+                placeholder="Gender"
+              />
+            )}
           />
           <div className="border-b-[1px] border-b-darkgray-main py-3 mb-3">
             <h3 className="text-xl font-bold">Address</h3>

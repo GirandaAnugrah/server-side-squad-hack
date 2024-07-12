@@ -24,7 +24,6 @@ const SignUp: React.FC<PersonalInfoProps> = ({
 }) => {
   const [cutomError, setCustomError] = useState("");
   const handleNextPage = handleSubmit((data) => {
-    console.log("DATA SIGN UP: ", data);
     if (data.confirmPassword !== data.password)
       return setCustomError("Password and Confirm Password must be the same");
 
@@ -33,7 +32,7 @@ const SignUp: React.FC<PersonalInfoProps> = ({
   return (
     <>
       <div className="h-screen grid place-items-center">
-        <div className="w-2/5 p-10">
+        <div className="md:w-2/5 w-full p-10">
           <h1 className="text-3xl font-bold py-10 text-center">Sign Up</h1>
           <form
             action=""
