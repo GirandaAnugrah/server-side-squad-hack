@@ -5,7 +5,7 @@ const LoadingFallback = () => {
         <div role="status">
           <svg
             aria-hidden="true"
-            className="w-16 h-16 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+            className="w-16 h-16 text-darkgray-main animate-spin fill-primary-main"
             viewBox="0 0 100 101"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

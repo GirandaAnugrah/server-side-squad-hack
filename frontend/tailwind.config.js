@@ -13,7 +13,10 @@ export default {
       "gray-body": "#5B5856",
     },
     fontFamily: {
-      sans: ['"DM Sans"', 'sans-serif']
+      sans: ['"DM Sans"', 'sans-serif'],
+      "light-gray": "#EFEFF1",
+      "darkred-main": "#FF0000",
+      "blue-main": "#0A77FF",
     },
     extend: {},
   },

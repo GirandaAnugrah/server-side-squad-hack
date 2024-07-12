@@ -5,10 +5,8 @@ import Footer from "../components/Footer";
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      <Navbar />
-      <div className="w-full bg-broken-white">
-      {children}
-      </div>
+      <Navbar hideButton={false} />
+      <div className="w-full bg-broken-white">{children}</div>
       <Footer />
     </>
   );
