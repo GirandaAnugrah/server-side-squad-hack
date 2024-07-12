@@ -1,7 +1,7 @@
 import { useReducer } from "react";
 import { userViewModel } from "../models/UserViewModel";
-import { auth, database } from "../../Firebase"
-import { Candidates, Recruiters, Users } from "../models/User";
+import { auth, database, storage } from "../../Firebase"
+import { Candidates, Recruiters, } from "../models/User";
 import { UserRoles } from "../models/UserRoles";
 
 const REGISTER_STATUS = {
@@ -32,7 +32,7 @@ const reducer = (state: userViewModel, action: { type: string, payload?: any }) 
 const useRegister = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    const register = async (user: Recruiters | Candidates) => {
+    const register = async (user: Recruiters | Candidates, userImageBlob: File | undefined) => {
         dispatch({ type: REGISTER_STATUS.PENDING });
         try {
             const credentials = await auth.createUserWithEmailAndPassword(user.email, user.password);
@@ -40,17 +40,26 @@ const useRegister = () => {
             if (!credentials.user || !credentials.user.uid) {
                 throw new Error('User UID is null or undefined');
             }
+            let imageLink = "";
+
+            if (userImageBlob) {
+                const imageRef = storage.ref().child(`users/${credentials.user.uid}/profileImage.jpg`);
+                await imageRef.put(userImageBlob);
+                imageLink = await imageRef.getDownloadURL();
+            }
 
             switch (user.role) {
                 case UserRoles.RECRUITERS:
                     user = {
                         ...user,
+                        imageLink: imageLink,
                         role: UserRoles.RECRUITERS,
                     } as Recruiters;
                     break;
                 case UserRoles.CANDIDATES:
                     user = {
                         ...user,
+                        imageLink: imageLink,
                         role: UserRoles.CANDIDATES,
                     } as Candidates;
                     break;

@@ -25,6 +25,7 @@ const initialCandidateState: Candidates = {
     desiredRole: '',
     location: '',
     description: '',
+    imageLink: '',
 };
 
 // Interface for the initial state of Recruiters
@@ -40,6 +41,7 @@ const initialRecruiterState: Recruiters = {
     district: '',
     street: '',
     role: UserRoles.RECRUITERS,
+    imageLink: '',
     jobPosition: [],
 };
 
@@ -47,11 +49,20 @@ const RegisterForm = () => {
     const [newUser, setNewUser] = useState<Candidates | Recruiters>(initialCandidateState);
     const [isRecruiter, setIsRecruiter] = useState(false); // State to toggle between candidate and recruiter
     const { loading, user, error, register } = useRegister();
+    const [profileImg, setProfileImg] = useState<File | undefined>(undefined);
+
+
+    const handleProfileImgChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0]; // Access the first selected file from input
+        if (file) {
+            setProfileImg(file);
+        }
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            await register(newUser);
+            await register(newUser, profileImg);
         } catch (error) {
             console.error('Registration error:', error);
         }
@@ -75,6 +86,22 @@ const RegisterForm = () => {
 
     return (
         <form className='w-64 mx-auto flex flex-col' onSubmit={handleSubmit}>
+
+            <h2>Upload Profile Image</h2>
+            <form onSubmit={handleSubmit}>
+                <input type="file" accept="image/*" onChange={handleProfileImgChange} />
+                <button type="submit">Upload</button>
+            </form>
+
+            {/* Display preview of selected image */}
+            {profileImg && (
+                <div>
+                    <h3>Selected Image Preview</h3>
+                    <img src={URL.createObjectURL(profileImg)} alt="Profile Preview" width="200" />
+                </div>
+            )}
+
+
             <input type="email" name="email" value={newUser.email} onChange={handleFormChange} placeholder="Email" required />
             <input type="password" name="password" value={newUser.password} onChange={handleFormChange} placeholder="Password" required />
             <input type="text" name="fullName" value={newUser.fullName} onChange={handleFormChange} placeholder="Full Name" />
@@ -89,30 +116,34 @@ const RegisterForm = () => {
                 <label htmlFor="default-checkbox" className="ms-2 text-sm font-medium">Recruiter Role</label>
             </div>
 
-            {!isRecruiter && (
-                <div>
-                    <input type="text" name="desiredRole" value={(newUser as Candidates).desiredRole} onChange={handleFormChange} placeholder="Desired Role" />
-                    <input type="text" name="location" value={(newUser as Candidates).location} onChange={handleFormChange} placeholder="Location" />
-                    <input name="description" value={(newUser as Candidates).description} onChange={handleFormChange} placeholder="Description" />
-                    <input type="text" name="interest" value={(newUser as Candidates).interest} onChange={handleFormChange} placeholder="Interests (comma-separated)" />
-                    <input type="text" name="deficiencies" value={(newUser as Candidates).deficiencies} onChange={handleFormChange} placeholder="Deficiencies (comma-separated)" />
-                    <input type="number" name="minimumSalary" value={(newUser as Candidates).minimumSalary} onChange={handleFormChange} placeholder="Minimum Salary" />
-                    <input type="number" name="maximumSalary" value={(newUser as Candidates).maximumSalary} onChange={handleFormChange} placeholder="Maximum Salary" />
-                </div>
-            )}
+            {
+                !isRecruiter && (
+                    <div>
+                        <input type="text" name="desiredRole" value={(newUser as Candidates).desiredRole} onChange={handleFormChange} placeholder="Desired Role" />
+                        <input type="text" name="location" value={(newUser as Candidates).location} onChange={handleFormChange} placeholder="Location" />
+                        <input name="description" value={(newUser as Candidates).description} onChange={handleFormChange} placeholder="Description" />
+                        <input type="text" name="interest" value={(newUser as Candidates).interest} onChange={handleFormChange} placeholder="Interests (comma-separated)" />
+                        <input type="text" name="deficiencies" value={(newUser as Candidates).deficiencies} onChange={handleFormChange} placeholder="Deficiencies (comma-separated)" />
+                        <input type="number" name="minimumSalary" value={(newUser as Candidates).minimumSalary} onChange={handleFormChange} placeholder="Minimum Salary" />
+                        <input type="number" name="maximumSalary" value={(newUser as Candidates).maximumSalary} onChange={handleFormChange} placeholder="Maximum Salary" />
+                    </div>
+                )
+            }
 
-            {isRecruiter && (
-                <div>
-                    <input type="text" name="jobPosition" value={(newUser as Recruiters).jobPosition} onChange={handleFormChange} placeholder="Job Position(s)" />
-                </div>
-            )}
+            {
+                isRecruiter && (
+                    <div>
+                        <input type="text" name="jobPosition" value={(newUser as Recruiters).jobPosition} onChange={handleFormChange} placeholder="Job Position(s)" />
+                    </div>
+                )
+            }
 
             <button type="submit" disabled={loading}>Register</button>
 
             {loading && <p>Loading...</p>}
             {error && <p>{error}</p>}
             {user && <p>User registered successfully: {user.email}</p>}
-        </form>
+        </form >
     );
 };
 
