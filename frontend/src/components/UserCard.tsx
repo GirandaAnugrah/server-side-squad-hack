@@ -1,10 +1,15 @@
 import { MapPin } from "lucide-react";
 import Chip from "./Chip";
+import { useNavigate } from "react-router-dom";
 
 const UserCard = () => {
+  const navigate = useNavigate();
   return (
     <>
-      <div className="rounded shadow-md p-5 border-[0.2px] border-color-text border-opacity-10">
+      <div
+        className="rounded shadow-md p-5 border-[0.2px] border-color-text border-opacity-10 cursor-pointer"
+        onClick={() => navigate("/detail-user/2")}
+      >
         <div className="flex gap-3">
           <img
             className="rounded-full w-20 h-20 border-[1px] border-primary-main"

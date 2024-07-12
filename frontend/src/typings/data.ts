@@ -7,7 +7,7 @@ export interface MainSlice {
 	userData: Recruiters | Candidates | null;
 	masterUser: Users | null;
 	userNow: string;
-
+	errorAlert: string | null;
 }
 
 export interface Users {

@@ -7,10 +7,13 @@ import LoadingFallback from "../../components/LoadingFallback";
 import { handleLogin } from "../../store/main-store/main.action";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const LoginPage = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { userData } = useAppSelector((state) => state.main);
   const { initialLoad } = useAppSelector((state) => state.main);
   const {
     register,
@@ -23,6 +26,10 @@ const LoginPage = () => {
   const submitLogin = handleSubmit(async (data) => {
     dispatch(handleLogin({ email: data.email, password: data.password }));
   });
+
+  useEffect(() => {
+    if (userData !== null) return navigate("/");
+  }, [dispatch, userData]);
 
   if (initialLoad) return <LoadingFallback />;
   return (

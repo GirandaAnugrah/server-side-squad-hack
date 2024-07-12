@@ -1,9 +1,21 @@
 import { Link, useLocation, useNavigate, useRoutes } from "react-router-dom";
 import Button from "./Button";
+import { useAppSelector } from "../hooks/useRedux";
+import { auth } from "../firebase/Firebase";
 
 const Navbar = ({ hideButton = false }: { hideButton: boolean }) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { userData } = useAppSelector((state) => state.main);
+
+  const handleSignOut = async () => {
+    try {
+      await auth.signOut();
+      console.log("User signed out successfully");
+    } catch (error) {
+      console.error("Sign-out error:", error);
+    }
+  };
   return (
     <nav className="bg-white-main shadow-lg fixed w-full z-50">
       <div className="flex p-5 justify-between">
@@ -29,15 +41,15 @@ const Navbar = ({ hideButton = false }: { hideButton: boolean }) => {
             HomePage
           </Link>
           <Link
-            to={"/find"}
+            to={"/find-employee"}
             className={`${
-              location.pathname === "/find" ? "text-primary-main " : ""
+              location.pathname === "/find-employee" ? "text-primary-main " : ""
             } hover:text-primary-main underline`}
           >
             Find Employee
           </Link>
         </div>
-        {!hideButton && (
+        {!hideButton && userData === null ? (
           <div className="flex gap-1">
             <Button
               onClick={() => navigate("/login")}
@@ -52,6 +64,18 @@ const Navbar = ({ hideButton = false }: { hideButton: boolean }) => {
               Register
             </Button>
           </div>
+        ) : (
+          <></>
+        )}
+        {!hideButton && userData !== null ? (
+          <Button
+            onClick={handleSignOut}
+            className="bg-primary-main px-3 text-sm text-white-main"
+          >
+            Logout
+          </Button>
+        ) : (
+          <></>
         )}
       </div>
     </nav>

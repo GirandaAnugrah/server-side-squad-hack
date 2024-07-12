@@ -7,6 +7,7 @@ const initialState: MainSlice = {
 	userData: null,
 	masterUser: null,
 	userNow: "",
+	errorAlert: null,
 };
 
 const mainSlice = createSlice({
@@ -25,9 +26,12 @@ const mainSlice = createSlice({
 		setUserNow(state, actions: PayloadAction<string>){
 			state.userNow = actions.payload
 		},
+		setErrorAlert(state, actions: PayloadAction<string | null>){
+			state.errorAlert = actions.payload
+		},
 	}
 })
 
-export const { setInitialLoading, setUserData, setMasterUser, setUserNow } = mainSlice.actions;
+export const { setInitialLoading, setUserData, setMasterUser, setUserNow, setErrorAlert } = mainSlice.actions;
 
 export default mainSlice;

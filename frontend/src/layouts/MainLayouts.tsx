@@ -1,6 +1,8 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import AlertError from "../components/AlertError";
+import { useAppSelector } from "../hooks/useRedux";
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -8,6 +10,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
       <Navbar hideButton={false} />
       <div className="w-full">{children}</div>
       <Footer />
+      {/* <AlertError /> */}
     </>
   );
 };

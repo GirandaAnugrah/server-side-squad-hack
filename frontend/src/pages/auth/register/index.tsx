@@ -13,12 +13,26 @@ import RegisterRole from "./RegisterRole";
 import SkillEducation from "./SkillEducation";
 import Defisiency from "./Deficiency";
 import JobPreferences from "./JobPreferences";
-import { useAppSelector } from "../../../hooks/useRedux";
+import { useAppDispatch, useAppSelector } from "../../../hooks/useRedux";
 import SeekingEmployee from "./SeekingEmployee";
+import useRegister from "../../../firebase/auth/hooks/useRegister";
+import { Candidates, Recruiters } from "../../../firebase/auth/models/User";
+import { UserRoles } from "../../../firebase/auth/models/UserRoles";
+import { Education } from "../../../firebase/enums/Education";
+import { Deficiencies } from "../../../firebase/enums/Deficiencies";
+import LoadingFallback from "../../../components/LoadingFallback";
+import { setErrorAlert } from "../../../store/main-store/main.slice";
+import AlertError from "../../../components/AlertError";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
+  const { userData } = useAppSelector((state) => state.main);
   const [page, setPage] = useState(0);
+  const dispatch = useAppDispatch();
   const { userNow } = useAppSelector((state) => state.main);
+  const { loading, user, error, register: handleRegisterUser } = useRegister();
+
   const {
     register,
     control,
@@ -29,15 +43,60 @@ const RegisterPage = () => {
     mode: "onChange",
     defaultValues: {},
   });
-  const handleRegisteruser = handleSubmit((data) => {
-    console.log("REGISTER DATA: ", data);
+  const handleRegisteruser = handleSubmit(async (data) => {
+    const paramReqruiter: Recruiters = {
+      fullName: data.fullName,
+      email: data.email,
+      password: data.password,
+      phoneNumber: data.phone,
+      birthdate: data.age,
+      gender: data.gender === "male" ? true : false,
+      province: data.province,
+      district: data.district,
+      street: data.streetName,
+      role: userNow === "normal" ? UserRoles.RECRUITERS : UserRoles.CANDIDATES,
+      jobPosition: [...data.jobPosition],
+    };
+    const paramCandidates: Candidates = {
+      fullName: data.fullName,
+      email: data.email,
+      password: data.password,
+      phoneNumber: data.phone,
+      birthdate: data.age,
+      gender: data.gender === "male" ? true : false,
+      province: data.province,
+      district: data.district,
+      street: data.streetName,
+      role: userNow === "normal" ? UserRoles.RECRUITERS : UserRoles.CANDIDATES,
+      interest: data.skils,
+      education: Education.NONE,
+      deficiencies: [Deficiencies.HEARING],
+      minimumSalary: data.minimumWage,
+      maximumSalary: data.maximumWage,
+      desiredRole: data.jobPosition,
+      location: data.province,
+      description: data.description,
+    };
+    const copyData = userNow === "normal" ? paramReqruiter : paramCandidates;
+    try {
+      await handleRegisterUser(copyData);
+    } catch (error) {
+      console.log("REGISTER DATA: ", (error as Error).message);
+    }
   });
+
   useEffect(() => {
-    console.log("PAGE: ", page);
-  }, [page]);
+    dispatch(setErrorAlert("Testinh"));
+  }, [dispatch]);
+  useEffect(() => {
+    if (userData !== null) return navigate("/");
+  }, [dispatch, userData]);
+
+  if (loading) return <LoadingFallback />;
   return (
     <>
       <Navbar hideButton={true} />
+      {/* {!error && <AlertError error={error}/>} */}
       {page === 0 && (
         <>
           <SignUp
