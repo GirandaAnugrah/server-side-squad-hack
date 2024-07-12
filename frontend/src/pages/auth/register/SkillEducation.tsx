@@ -5,6 +5,7 @@ import Button from "../../../components/Button";
 import Badge from "../../../components/Badge";
 import { UseFormSetValue } from "react-hook-form";
 import { PersonalData } from "../../../typings/data";
+import { Education } from "../../../firebase/enums/Education";
 
 interface SkillProps {
   setValue: UseFormSetValue<PersonalData>;

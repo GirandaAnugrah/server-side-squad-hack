@@ -1,6 +1,8 @@
 import { User } from "firebase/auth";
 import { Candidates, Recruiters } from "../firebase/auth/models/User";
 import { UserRoles } from "../firebase/auth/models/UserRoles";
+import { Deficiencies } from "../firebase/enums/Deficiencies";
+import { Education } from "../firebase/enums/Education";
 
 export interface MainSlice {
 	initialLoad: boolean;
@@ -51,4 +53,5 @@ export interface PersonalData {
 	jobPosition: string;
 	firstJob: string;
 	secJob: string;
+	profileImage: File | undefined;
 }

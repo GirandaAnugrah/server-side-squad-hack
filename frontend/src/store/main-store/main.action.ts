@@ -1,7 +1,7 @@
 import useLogin from "../../firebase/auth/hooks/useLogin";
 import { Candidates, Recruiters } from "../../firebase/auth/models/User";
 import { UserRoles } from "../../firebase/auth/models/UserRoles";
-import { auth, database } from "../../firebase/Firebase";
+import { auth, database, storage } from "../../firebase/Firebase";
 import LoginForm from "../../firebase/LoginAuthExample";
 import { Users } from "../../typings/data";
 import { ThunkActionType } from "../../typings/redux";
@@ -27,7 +27,7 @@ export const handleLogin =
   };
 
 export const handleRegister =
-  ({ user }: { user: Candidates | Recruiters }): ThunkActionType<void> =>
+  ({ user,userImageBlob }: { user: Candidates | Recruiters; userImageBlob: File | undefined }): ThunkActionType<void> =>
   async (dispatch) => {
     try {
       dispatch(setInitialLoading(true));
@@ -39,17 +39,25 @@ export const handleRegister =
       if (!credentials.user || !credentials.user.uid) {
         throw new Error("User UID is null or undefined");
       }
+      // let imageLink = "";
 
+      // if (userImageBlob) {
+      //     const imageRef = storage.ref().child(`users/${credentials.user.uid}/profileImage.jpg`);
+      //     await imageRef.put(userImageBlob);
+      //     imageLink = await imageRef.getDownloadURL();
+      // }
       switch (user.role) {
         case UserRoles.RECRUITERS:
           user = {
             ...user,
+            imageLink: "",
             role: UserRoles.RECRUITERS,
           } as Recruiters;
           break;
         case UserRoles.CANDIDATES:
           user = {
             ...user,
+            imageLink: "",
             role: UserRoles.CANDIDATES,
           } as Candidates;
           break;
@@ -60,10 +68,12 @@ export const handleRegister =
       await database.ref(`users/` + credentials.user.uid).set({
         ...user,
       });
+      console.log("MASUKK SEMUA");
 
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : "Unknown error.";
+        console.log("ERROR MESSAGE: ", errorMessage)
     }finally {
       dispatch(setInitialLoading(false));
     }

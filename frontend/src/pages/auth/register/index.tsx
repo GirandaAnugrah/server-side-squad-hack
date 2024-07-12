@@ -1,9 +1,5 @@
 import { useForm } from "react-hook-form";
-import InputText from "../../../components/InputText";
-import ProgressBar from "../../../components/ProgressBar";
-import MainLayout from "../../../layouts/MainLayouts";
 import { PersonalData } from "../../../typings/data";
-import Button from "../../../components/Button";
 import { useEffect, useState } from "react";
 import PersonalInfo from "./PersonalInfo";
 import SignUp from "./SignUp";
@@ -22,7 +18,6 @@ import { Education } from "../../../firebase/enums/Education";
 import { Deficiencies } from "../../../firebase/enums/Deficiencies";
 import LoadingFallback from "../../../components/LoadingFallback";
 import { setErrorAlert } from "../../../store/main-store/main.slice";
-import AlertError from "../../../components/AlertError";
 import { useNavigate } from "react-router-dom";
 import { handleRegister } from "../../../store/main-store/main.action";
 
@@ -33,6 +28,7 @@ const RegisterPage = () => {
   const dispatch = useAppDispatch();
   const { userNow } = useAppSelector((state) => state.main);
   const { loading, user, error, register: handleRegisterUser } = useRegister();
+  const [profileImg, setProfileImg] = useState<File | undefined>(undefined);
 
   const {
     register,
@@ -45,8 +41,8 @@ const RegisterPage = () => {
     defaultValues: {},
   });
   const handleRegisteruser = handleSubmit(async (data) => {
+    console.log("MASUK KE ");
     const paramReqruiter: Recruiters = {
-      uid: new Date().getTime().toString(),
       fullName: data.fullName,
       email: data.email,
       password: data.password,
@@ -57,10 +53,10 @@ const RegisterPage = () => {
       district: data.district,
       street: data.streetName,
       role: userNow === "normal" ? UserRoles.RECRUITERS : UserRoles.CANDIDATES,
-      jobPosition: [...data.jobPosition],
+      jobPosition: [data.firstJob, data.secJob],
+      imageLink: "",
     };
     const paramCandidates: Candidates = {
-      uid: new Date().getTime().toString(),
       fullName: data.fullName,
       email: data.email,
       password: data.password,
@@ -72,16 +68,17 @@ const RegisterPage = () => {
       street: data.streetName,
       role: userNow === "normal" ? UserRoles.RECRUITERS : UserRoles.CANDIDATES,
       interest: data.skils,
-      education: Education.NONE,
-      deficiencies: [Deficiencies.HEARING],
+      education: data.education as Education,
+      deficiencies: data.deficiency as Deficiencies[],
       minimumSalary: data.minimumWage,
       maximumSalary: data.maximumWage,
       desiredRole: data.jobPosition,
       location: data.province,
       description: data.description,
+      imageLink: "",
     };
     const copyData = userNow === "normal" ? paramReqruiter : paramCandidates;
-    dispatch(handleRegister({ user: copyData }));
+    dispatch(handleRegister({ user: copyData, userImageBlob: profileImg }));
   });
 
   useEffect(() => {
@@ -134,6 +131,8 @@ const RegisterPage = () => {
           errors={errors}
           nextpage={setPage}
           control={control}
+          setProfileImage={setProfileImg}
+          profileImage={profileImg}
         />
       )}
       <Footer />
