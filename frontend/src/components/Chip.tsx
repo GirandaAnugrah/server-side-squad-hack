@@ -7,8 +7,7 @@ const Chip = ({
 }) => {
   return (
     <div
-      className={`${className} px-3 py-1 rounded-xl min-w-28 flex justify-center items-center text-sm `}
-    >
+      className={`${className} px-4 py-1.5 rounded-full  flex justify-center items-center text-xs font-semibold`}>
       {children}
     </div>
   );

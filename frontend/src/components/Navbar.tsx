@@ -13,7 +13,7 @@ const Navbar = () => {
             EqualPath
           </span>
         </a>
-        <div className="flex gap-1">
+        <div className="flex gap-4">
           <Button className="border-[2px] border-primary-main px-3 text-sm md:px-6 text-primary-main">
             Login
           </Button>

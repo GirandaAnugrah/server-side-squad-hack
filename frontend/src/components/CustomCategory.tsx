@@ -13,12 +13,12 @@ const CustomCategory: React.FC<CustomCategoryProps> = ({
   employers,
 }) => {
   return (
-    <div className="flex flex-col gap-3 border-[1px] border-color-text border-opacity-20 p-5">
+    <div className="flex flex-col gap-4 border-[2px] border-color-text border-opacity-5 p-6 rounded-md">
       {icon}
-      <h2 className="text-2xl font-bold">{title}</h2>
+      <h2 className="text-2xl font-medium">{title}</h2>
       <p className="flex items-center opacity-50">
         {employers ? employers + " employers " : ""}{" "}
-        <MoveRight className="w-5" />
+        <MoveRight className="mx-2 w-6 text-color-text" />
       </p>
     </div>
   );

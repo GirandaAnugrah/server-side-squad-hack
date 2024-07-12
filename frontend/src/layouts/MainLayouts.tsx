@@ -6,7 +6,9 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Navbar />
+      <div className="w-full bg-broken-white">
       {children}
+      </div>
       <Footer />
     </>
   );
