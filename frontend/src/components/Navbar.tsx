@@ -21,17 +21,14 @@ const Navbar = ({ hideButton = false }: { hideButton: boolean }) => {
     <nav className="bg-white-main shadow-lg fixed w-full z-50">
       <div className="flex p-5 justify-between">
         <Link to="/" className="flex items-center gap-1">
-          {/* <img
-            src="https://flowbite.com/docs/images/logo.svg"
-            className="h-8"
-          /> */}
+          ={" "}
           <Link
             to={"/"}
             className="text-2xl md:text-3xl text-primary-main font-bold"
           >
             EqualPath
           </Link>
-        </a>
+        </Link>
         <div className="flex justify-center items-center gap-8">
           <Link
             to={"/"}
@@ -44,7 +41,7 @@ const Navbar = ({ hideButton = false }: { hideButton: boolean }) => {
           <Link
             to={"/find-employee"}
             className={`${
-              location.pathname === "/find" ? "text-primary-main " : ""
+              location.pathname === "/find-employee" ? "text-primary-main " : ""
             } hover:text-primary-main`}
           >
             Find Employee
