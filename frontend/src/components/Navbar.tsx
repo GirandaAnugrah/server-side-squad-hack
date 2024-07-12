@@ -19,20 +19,20 @@ const Navbar = ({ hideButton = false }: { hideButton: boolean }) => {
             EqualPath
           </Link>
         </a>
-        <div className="flex justify-center items-center gap-3">
+        <div className="flex justify-center items-center gap-8">
           <Link
             to={"/"}
             className={`${
               location.pathname === "/" ? "text-primary-main " : ""
-            } hover:text-primary-main underline`}
+            } hover:text-primary-main`}
           >
-            HomePage
+            Home
           </Link>
           <Link
             to={"/find"}
             className={`${
               location.pathname === "/find" ? "text-primary-main " : ""
-            } hover:text-primary-main underline`}
+            } hover:text-primary-main`}
           >
             Find Employee
           </Link>

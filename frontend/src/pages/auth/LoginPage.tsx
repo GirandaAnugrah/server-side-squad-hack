@@ -62,9 +62,10 @@ const LoginPage = () => {
           </Button>
           <span className="text-center">
             Don’t have an account ?{" "}
-            <Link className="text-blue-main" to={"/register"}>
+            <span className="text-link-color font-bold"><Link className="text-blue-main" to={"/register"}>
               Sign up
             </Link>
+            </span>
           </span>
         </form>
       </div>

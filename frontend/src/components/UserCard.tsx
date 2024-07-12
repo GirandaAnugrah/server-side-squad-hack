@@ -19,10 +19,10 @@ const UserCard = () => {
               </div>
             </div>
             <p className="text-gray flex items-center text-color-text opacity-80 gap-1 flex-wrap">
-              <span className="flex gap-2 mr-2">
+              <span className="flex gap-2">
                 <MapPin className="w-4 text-gray-body" /> Tangerang, Banten
               </span>
-              <span className="flex gap-2 ml-2">
+              <span className="flex gap-2">
                 <Currency className="w-4 text-gray-body" /> Rp. 500.000 - Rp. 1.500.000
               </span>
             </p>

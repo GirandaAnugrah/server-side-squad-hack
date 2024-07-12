@@ -12,7 +12,7 @@ const Badge = ({
     <>
       <div
         className={`px-4 py-2 text-sm rounded-3xl border-[2px] cursor-pointer ${
-          check ? "border-primary-main" : "border-darkgray-main"
+          check ? "border-primary-background bg-primary-main text-white-main" : "border-darkgray-main"
         }`}
         {...props}
       >

@@ -23,7 +23,7 @@ const SkillEducation: React.FC<SkillProps> = ({ setValue, nextPage }) => {
   };
   return (
     <>
-      <div className="h-screen grid place-items-center">
+      <div className="h-screen grid place-items-center bg-broken-white">
         <div className="flex flex-col md:w-2/5 mx-5">
           <div className="md:w-2/5 mx-auto mb-5">
             <h1 className="text-3xl font-bold">Skill & Education</h1>
@@ -32,17 +32,19 @@ const SkillEducation: React.FC<SkillProps> = ({ setValue, nextPage }) => {
           <div className="border-b-darkgray-main border-b-[1px] w-full">
             <h2 className="text-2xl font-bold">Skills & Interests</h2>
           </div>
-          <div className="mt-3 flex flex-wrap gap-2 justify-around">
+          <div className="pt-3 flex flex-wrap gap-2 justify-normal">
             <CheckBox title="Teaching" setChecked={setSkils} />
             <CheckBox title="Cooking" setChecked={setSkils} />
             <CheckBox title="House Assisting" setChecked={setSkils} />
             <CheckBox title="Baby Sitting" setChecked={setSkils} />
+            <CheckBox title="Musician" setChecked={setSkils} />
+            <CheckBox title="Coding & Design" setChecked={setSkils} />
             <CheckBox title="Customer Service" setChecked={setSkils} />
           </div>
           <div className="border-b-darkgray-main border-b-[1px] w-full">
-            <h2 className="text-2xl font-bold">Highest Education</h2>
+            <h2 className="text-2xl font-bold mt-6">Highest Education</h2>
           </div>
-          <div className="mt-3 flex flex-wrap gap-2 justify-evenly py-3">
+          <div className="mt-3 flex flex-wrap gap-2 justify-normal">
             <Badge
               onClick={() => setStudies("No Studies")}
               check={studies === "No Studies"}
@@ -89,8 +91,7 @@ const SkillEducation: React.FC<SkillProps> = ({ setValue, nextPage }) => {
 
           <Button
             onClick={handleNextPage}
-            className="bg-primary-main rounded-md text-white-main"
-          >
+            className="bg-primary-main rounded-md text-white-main mt-6">
             Next
           </Button>
         </div>

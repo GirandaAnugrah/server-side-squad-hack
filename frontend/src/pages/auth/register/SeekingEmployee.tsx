@@ -24,7 +24,7 @@ const SeekingEmployee: React.FC<PersonalInfoProps> = ({
 }) => {
   return (
     <>
-      <div className="h-screen grid place-items-center">
+      <div className="h-screen grid place-items-center bg-broken-white">
         <div className="flex flex-col w-full px-5 md:w-2/5 ">
           <div className="w-full mx-auto mb-5">
             <h1 className="text-3xl font-bold mb-4">Seeking Employee</h1>
@@ -42,11 +42,11 @@ const SeekingEmployee: React.FC<PersonalInfoProps> = ({
                 name="firstJob"
                 shouldUnregister
                 rules={{
-                  required: "Tampaknya Refrensi anda masih kosong!",
+                  required: "This job position field is still empty!",
                 }}
                 render={({ field: { onChange, value } }) => (
                   <ReactSelectWithLabel
-                    label="Referensi Anda Menerima Informasi ini dari?"
+                    label="First job position you’re looking for"
                     getOptionLabel={(opt) => opt.label}
                     getOptionValue={(opt) => opt.value}
                     value={PreferenceOption.find((opt) => opt.value === value)}
@@ -57,7 +57,7 @@ const SeekingEmployee: React.FC<PersonalInfoProps> = ({
                     }}
                     // menuPosition="fixed"
                     className="mt-4"
-                    placeholder="Referensi anda"
+                    placeholder="Enter the first job position"
                   />
                 )}
               />
@@ -66,11 +66,11 @@ const SeekingEmployee: React.FC<PersonalInfoProps> = ({
                 name="secJob"
                 shouldUnregister
                 rules={{
-                  required: "Tampaknya Refrensi anda masih kosong!",
+                  required: "This job position field is still empty!",
                 }}
                 render={({ field: { onChange, value } }) => (
                   <ReactSelectWithLabel
-                    label="Referensi Anda Menerima Informasi ini dari?"
+                    label="Second job position you’re looking for"
                     getOptionLabel={(opt) => opt.label}
                     getOptionValue={(opt) => opt.value}
                     value={PreferenceOption.find((opt) => opt.value === value)}
@@ -81,7 +81,7 @@ const SeekingEmployee: React.FC<PersonalInfoProps> = ({
                     }}
                     // menuPosition="fixed"
                     className="mt-4"
-                    placeholder="Referensi anda"
+                    placeholder="Enter the second job position"
                   />
                 )}
               />

@@ -7,7 +7,7 @@ const Button: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement>> = ({
 }) => {
   return (
     <button
-      className={`${className} px-2 py-1 md:py-2 rounded-sm text-md font-bold text-white border-primary-main`}
+      className={`${className} px-2 py-1.5 md:py-2 rounded-md text-md font-bold text-white border-primary-main`}
       {...props}
     >
       {children}
