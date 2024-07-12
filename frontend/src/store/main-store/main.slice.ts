@@ -8,6 +8,8 @@ const initialState: MainSlice = {
 	masterUser: null,
 	userNow: "",
 	errorAlert: null,
+	dataCandidates: [],
+	detailCandidates: null,
 };
 
 const mainSlice = createSlice({
@@ -29,9 +31,15 @@ const mainSlice = createSlice({
 		setErrorAlert(state, actions: PayloadAction<string | null>){
 			state.errorAlert = actions.payload
 		},
+		setDataCandidates(state, actions: PayloadAction<Candidates[]>){
+			state.dataCandidates = actions.payload
+		},
+		setDetailCandidate(state, actions: PayloadAction<Candidates | null>){
+			state.detailCandidates = actions.payload
+		},
 	}
 })
 
-export const { setInitialLoading, setUserData, setMasterUser, setUserNow, setErrorAlert } = mainSlice.actions;
+export const { setInitialLoading, setUserData, setMasterUser, setUserNow, setErrorAlert, setDataCandidates, setDetailCandidate } = mainSlice.actions;
 
 export default mainSlice;

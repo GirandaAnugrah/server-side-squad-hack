@@ -48,7 +48,7 @@ function App() {
         <Route path="/find" element={<FindPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/find-employee" element={<FindEmployee />} />
-        <Route path="/detail-user/:id" element={<DetailUser />} />
+        <Route path="/detail-user" element={<DetailUser />} />
       </Routes>
     </BrowserRouter>
   );

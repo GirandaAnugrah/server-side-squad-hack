@@ -19,7 +19,7 @@ const Navbar = ({ hideButton = false }: { hideButton: boolean }) => {
   return (
     <nav className="bg-white-main shadow-lg fixed w-full z-50">
       <div className="flex p-5 justify-between">
-        <a href="" className="flex items-center gap-1">
+        <Link to="/" className="flex items-center gap-1">
           {/* <img
             src="https://flowbite.com/docs/images/logo.svg"
             className="h-8"
@@ -30,15 +30,15 @@ const Navbar = ({ hideButton = false }: { hideButton: boolean }) => {
           >
             EqualPath
           </Link>
-        </a>
-        <div className="flex justify-center items-center gap-3">
+        </Link>
+        <div className="hidden md:flex justify-center items-center gap-3">
           <Link
             to={"/"}
             className={`${
               location.pathname === "/" ? "text-primary-main " : ""
             } hover:text-primary-main underline`}
           >
-            HomePage
+            Home Page
           </Link>
           <Link
             to={"/find-employee"}

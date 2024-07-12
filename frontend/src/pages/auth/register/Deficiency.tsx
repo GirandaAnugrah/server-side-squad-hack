@@ -21,7 +21,7 @@ const Defisiency: React.FC<DeviciensiesProps> = ({ setValue, nextPage }) => {
     <>
       <div className="h-screen grid place-items-center">
         <div className="flex flex-col md:w-2/5 mx-5">
-          <div className="md:w-2/5 mx-auto mb-5">
+          <div className="w-full mx-auto mb-5">
             <h1 className="text-3xl font-bold">Deficiency</h1>
             <ProgressBar percents="80%" />
           </div>

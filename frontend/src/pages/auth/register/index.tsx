@@ -24,6 +24,7 @@ import LoadingFallback from "../../../components/LoadingFallback";
 import { setErrorAlert } from "../../../store/main-store/main.slice";
 import AlertError from "../../../components/AlertError";
 import { useNavigate } from "react-router-dom";
+import { handleRegister } from "../../../store/main-store/main.action";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -45,6 +46,7 @@ const RegisterPage = () => {
   });
   const handleRegisteruser = handleSubmit(async (data) => {
     const paramReqruiter: Recruiters = {
+      uid: new Date().getTime().toString(),
       fullName: data.fullName,
       email: data.email,
       password: data.password,
@@ -58,6 +60,7 @@ const RegisterPage = () => {
       jobPosition: [...data.jobPosition],
     };
     const paramCandidates: Candidates = {
+      uid: new Date().getTime().toString(),
       fullName: data.fullName,
       email: data.email,
       password: data.password,
@@ -78,11 +81,7 @@ const RegisterPage = () => {
       description: data.description,
     };
     const copyData = userNow === "normal" ? paramReqruiter : paramCandidates;
-    try {
-      await handleRegisterUser(copyData);
-    } catch (error) {
-      console.log("REGISTER DATA: ", (error as Error).message);
-    }
+    dispatch(handleRegister({ user: copyData }));
   });
 
   useEffect(() => {

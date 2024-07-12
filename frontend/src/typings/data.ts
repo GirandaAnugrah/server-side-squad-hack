@@ -8,6 +8,8 @@ export interface MainSlice {
 	masterUser: Users | null;
 	userNow: string;
 	errorAlert: string | null;
+	dataCandidates: Candidates[];
+	detailCandidates: Candidates | null;
 }
 
 export interface Users {

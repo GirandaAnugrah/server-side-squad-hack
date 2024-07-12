@@ -3,8 +3,36 @@ import MainLayout from "../../layouts/MainLayouts";
 import ImageIcon from "../../assets/images/icon-home.svg";
 import UserCard from "../../components/UserCard";
 import InputText from "../../components/InputText";
+import { useFetchCandidatesList } from "../../firebase/Candidates/hooks/useFetchCandidatesList";
+import { useEffect, useMemo, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../hooks/useRedux";
+import { getAllDataUser } from "../../store/main-store/main.action";
+import useQueryUrl from "../../hooks/useQueryUrl";
+import SearchTextLocation from "../../components/SearchTextLocation";
 
 const FindEmployee = () => {
+  const dispatch = useAppDispatch();
+  const { dataCandidates } = useAppSelector((state) => state.main);
+  const query = useQueryUrl();
+  const [searchSkill, setSearchSkill] = useState(query.get("searchkey") || "");
+  const [searchLoc, setSearchLoc] = useState("");
+
+  const memoizeData = useMemo(() => {
+    return searchSkill === "" && searchLoc === ""
+      ? dataCandidates
+      : dataCandidates
+          .filter((dt) =>
+            dt.desiredRole.toLowerCase().includes(searchSkill.toLowerCase())
+          )
+          .filter((dt) =>
+            dt.location.toLowerCase().includes(searchLoc.toLowerCase())
+          );
+  }, [searchSkill, dataCandidates]);
+
+  useEffect(() => {
+    dispatch(getAllDataUser());
+  }, [dispatch]);
+
   return (
     <MainLayout>
       <div className="h-screen grid place-items-center pt-24 lg:pt-0">
@@ -18,23 +46,29 @@ const FindEmployee = () => {
               Empowering individuals with disabilities by connecting them to
               meaningful employment opportunities.
             </p>
-            <SearchInput />
+            <SearchTextLocation
+              searchKeyLocation={setSearchLoc}
+              searchKeySkill={setSearchSkill}
+            />
+            {/* <SearchInput searchKey={setSearch} /> */}
           </div>
         </div>
       </div>
       <div className="pt-16 md:pt-0 px-2 lg:px-40 mb-10">
         <div className="flex justify-between">
-          <span className="text-sm md:text-xl px-5 mb-6 flex">
-            3177 Job seekers that match the keyword{" "}
-            <span className="font-bold">“Mathematics Tutor”</span>
+          <span
+            className={`text-sm md:text-xl px-5 mb-6 flex ${
+              searchSkill === "" ? "hidden" : ""
+            }`}
+          >
+            {memoizeData.length} Job seekers that match the keyword{" "}
+            <span className={`font-bold`}>“{searchSkill}”</span>
           </span>
         </div>
         <div className="grid md:grid-cols-2 gap-2 md:gap-2">
-          <UserCard />
-          <UserCard />
-          <UserCard />
-          <UserCard />
-          <UserCard />
+          {memoizeData.map((dt) => (
+            <UserCard user={dt} />
+          ))}
         </div>
       </div>
     </MainLayout>

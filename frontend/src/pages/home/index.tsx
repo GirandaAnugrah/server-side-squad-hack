@@ -16,9 +16,14 @@ import OfferingCard from "../../components/OfferingCard";
 import Button from "../../components/Button";
 import UserCard from "../../components/UserCard";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const HomePage = () => {
   const navigate = useNavigate();
+  const [search, setSearch] = useState("");
+  const handleOnSearch = () => {
+    return navigate(`/find-employee?searchkey=${search}`);
+  };
   return (
     <MainLayout>
       <div className="h-screen grid place-items-center pt-24 lg:pt-0">
@@ -32,23 +37,26 @@ const HomePage = () => {
               Empowering individuals with disabilities by connecting them to
               meaningful employment opportunities.
             </p>
-            <SearchInput />
+            <SearchInput searchKey={setSearch} onSearch={handleOnSearch} />
           </div>
         </div>
       </div>
       <div className="pt-16 md:pt-0 px-2 lg:px-40 mb-10">
         <div className="flex justify-between">
           <h2 className="text-5xl font-bold px-5 mb-12">
-          Explore by <span className="text-primary-main">Category</span>
+            Explore by <span className="text-primary-main">Category</span>
           </h2>
           <div className="flex">
-            <p className="text-lg font-medium text-primary-main">Show all job seekers</p>
+            <p
+              className="text-lg font-medium text-primary-main cursor-pointer"
+              onClick={() => navigate("/find-employee")}
+            >
+              Show all job seekers
+            </p>
             <MoveRight className="mx-2 w-6 text-primary-main  " />
-            </div>
+          </div>
         </div>
-        
-        
-        
+
         <div className="grid sm:grid-cols-4 gap-2 sm:gap-10">
           <CustomCategory
             icon={<GraduationCap className="w-12 h-12 text-primary-main" />}
@@ -88,13 +96,15 @@ const HomePage = () => {
         </div>
       </div>
       <div className="xl:flex justify-between pt-20 mx-32">
-        <div className="flex flex-col justify-center items-start w-2/3">
+        <div className="flex flex-col items-start w-2/3">
           <div>
-            <h1 className="text-lg font-regular tracking-widest text-primary-main">EqualPath</h1>
+            <h1 className="text-lg font-regular tracking-widest text-primary-main">
+              EqualPath
+            </h1>
             <h1 className="text-5xl pt-2 font-bold">What we offer</h1>
           </div>
         </div>
-        <div className="grid md:grid-cols-3 gap-10">
+        <div className="md:grid grid-cols-3 gap-10">
           <OfferingCard
             title="Find your Dream Job Opportunity"
             desc="Our platform connects you with employers who value diversity and are committed to creating an inclusive workforce"
@@ -126,7 +136,7 @@ const HomePage = () => {
             jobs that match their abilities and specializations.
           </p>
         </div>
-        
+
         <div className="flex flex-col gap-10">
           <h1 className="text-5xl font-bold">Register Now</h1>
           <p>
@@ -146,7 +156,6 @@ const HomePage = () => {
         </div>
       </div>
     </MainLayout>
-    
   );
 };
 
