@@ -1,18 +1,13 @@
 // import { BrowserRouter, Route, Routes } from "react-router-dom";
 // import HomePage from "./pages/home";
 // import { useAppDispatch, useAppSelector } from "./hooks/useRedux";
-import { useState } from "react";
 // import { setInitialLoading } from "./store/main-store/main.slice";
 import "./App.css";
 import { useFetchCandidatesList } from "./firebase/Candidates/hooks/useFetchCandidatesList";
 
 function App() {
 
-
   const { candidates, isLoading, error } = useFetchCandidatesList({
-    Deficiencies: ['nohands'],
-    gender: true,
-    interest: ["football"],
   });
 
   if (isLoading) {
