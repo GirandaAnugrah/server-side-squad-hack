@@ -4,14 +4,17 @@ export default {
   theme: {
     colors: {
       "primary-main": "#FCA34D",
+      "primary-background": "#FADCBC",
       "secondary-main": "#56CDAD",
       "tertiary-main": "#568DCD",
+      "link-color": "#0A77FF",
       "white-main": "#FFFFFF",
       "color-text": "#141414",
       "darkgray-main": "#373737",
       "broken-white": "#FCFCFC",
       "gray-body": "#5B5856",
       "darkred-main": "#FF0000",
+      "light-gray-body": "#EFEFF1",
     },
     fontFamily: {
       sans: ["DM Sans", "sans-serif"],

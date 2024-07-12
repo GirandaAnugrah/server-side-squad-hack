@@ -27,7 +27,7 @@ const CheckBox = ({
 
       <label
         htmlFor="bordered-checkbox-2"
-        className={`w-full py-2 ms-2 text-sm font-medium ${
+        className={`w-full py-2 ms-2 text-sm ${
           isCheck ? "text-primary-main" : "text-darkgray-main"
         } `}
       >

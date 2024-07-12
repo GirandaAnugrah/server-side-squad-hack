@@ -29,44 +29,43 @@ const RegisterRole: React.FC<PersonalInfoProps> = ({ setValue, nextpage }) => {
   };
   return (
     <>
-      <div className="h-screen grid place-items-center">
+      <div className="h-screen grid place-items-center bg-broken-white">
         <div className="md:w-2/4 flex flex-col mx-5 gap-3">
           <h1 className="text-center text-3xl font-bold mb-8">
             What Role Are You?
           </h1>
           <div className="grid grid-cols-2 gap-2">
             <div
-              className={`rounded-xl text-center flex flex-col items-center border-[1.5px] ${
+              className={`rounded-xl text-center flex flex-col items-center border-[3px] ${
                 chosee === "disable"
                   ? "border-primary-main"
-                  : "border-light-gray"
-              } p-5 gap-3 cursor-pointer`}
+                  : "border-light-gray-body"
+              } p-6 gap-3 cursor-pointer`}
               onClick={() => setChosee("disable")}
             >
               <img src={Disabled} alt="" className="w-32 h-32" />
               <h1 className="text-xl font-bold">
                 I’m disabled & actively searching for a job{" "}
               </h1>
-              <p>
+              <p className="text-sm opacity-50">
                 Your disability can range from visual, hearing and speaking
                 impairment, inability to walk and neurological disorders
               </p>
             </div>
             <div
-              className={`rounded-xl text-center flex flex-col items-center border-[1.5px] ${
+              className={`rounded-xl text-center flex flex-col items-center border-[3px] ${
                 chosee === "normal"
                   ? "border-primary-main"
-                  : "border-light-gray"
-              } p-5 gap-3 cursor-pointer`}
+                  : "border-light-gray-body"
+              } p-6 gap-3 cursor-pointer`}
               onClick={() => setChosee("normal")}
             >
               <img src={Employer} alt="" className="w-32 h-32" />
               <h1 className="text-xl font-bold">
-                I’m disabled & actively searching for a job{" "}
+                I’m an employer & hiring disabled employees{" "}
               </h1>
-              <p>
-                Your disability can range from visual, hearing and speaking
-                impairment, inability to walk and neurological disorders
+              <p className="text-sm opacity-50">
+                You are using this website to search for disabled job seekers and to provide financial assistance to disabled individuals
               </p>
             </div>
           </div>

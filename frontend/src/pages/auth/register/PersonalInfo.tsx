@@ -52,7 +52,7 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({
   };
   return (
     <>
-      <div className="mx-5 md:w-2/5 md:mx-auto pt-32 flex flex-col gap-2">
+      <div className="mx-5 md:w-2/5 md:mx-auto pt-32 flex flex-col gap-2 bg-broken-white">
         <div className="w-80 mx-auto">
           <h1 className="text-4xl font-bold text-center mb-3">Personal info</h1>
           <ProgressBar percents="30%" />

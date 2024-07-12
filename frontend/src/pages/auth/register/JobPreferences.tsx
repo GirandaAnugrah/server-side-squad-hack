@@ -15,6 +15,7 @@ import { PersonalData } from "../../../typings/data";
 import React from "react";
 import ReactSelectWithLabel from "../../../components/ReactSelectWithLabel";
 import { PreferenceOption } from "../../../constant/constant";
+import { Route } from "react-router-dom";
 
 interface PersonalInfoProps {
   register: UseFormRegister<PersonalData>;
@@ -36,14 +37,14 @@ const JobPreferences: React.FC<PersonalInfoProps> = ({
 
   return (
     <>
-      <div className="h-screen grid place-items-center">
+      <div className="h-screen grid place-items-center bg-broken-white">
         <div className="flex flex-col w-full px-5 md:w-2/5 ">
           <div className="w-full mx-auto mb-5">
             <h1 className="text-3xl font-bold">Job Preferences</h1>
             <ProgressBar percents="100%" />
           </div>
           <div className="border-b-darkgray-main border-b-[1px] w-full">
-            <h2 className="text-2xl font-bold mb-4">
+            <h2 className="text-2xl font-bold mb-3">
               Desired Job Position & Wage
             </h2>
           </div>
@@ -60,11 +61,11 @@ const JobPreferences: React.FC<PersonalInfoProps> = ({
                 name="jobPosition"
                 shouldUnregister
                 rules={{
-                  required: "Tampaknya Refrensi anda masih kosong!",
+                  required: "Desired job position is still empty!",
                 }}
                 render={({ field: { onChange, value } }) => (
                   <ReactSelectWithLabel
-                    label="Referensi Anda Menerima Informasi ini dari?"
+                    label="Desired Job Position"
                     getOptionLabel={(opt) => opt.label}
                     getOptionValue={(opt) => opt.value}
                     value={PreferenceOption.find((opt) => opt.value === value)}
@@ -74,23 +75,25 @@ const JobPreferences: React.FC<PersonalInfoProps> = ({
                       onChange(opt?.value.toString());
                     }}
                     // menuPosition="fixed"
-                    className="mt-4"
-                    placeholder="Referensi anda"
+                    className="mt-4 mb-2"
+                    placeholder="Your job position..."
                   />
                 )}
               />
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 gap-4 mb-4">
                 <InputText
+                  className="z-0"
                   type="number"
-                  labelname="Minimum Wage"
+                  labelname="Minimum Wage (in Rupiah)"
                   errMsg={errors.minimumWage?.message}
                   {...register("minimumWage", {
                     required: "Need to input this field",
                   })}
                 />
                 <InputText
+                  className="z-0"
                   type="number"
-                  labelname="Maximum Wage"
+                  labelname="Maximum Wage (in Rupiah)"
                   errMsg={errors.maximumWage?.message}
                   {...register("maximumWage", {
                     required: "Need to input this field",

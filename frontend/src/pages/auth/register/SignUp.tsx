@@ -31,7 +31,7 @@ const SignUp: React.FC<PersonalInfoProps> = ({
   });
   return (
     <>
-      <div className="h-screen grid place-items-center">
+      <div className="h-screen grid place-items-center bg-broken-white">
         <div className="md:w-2/5 w-full p-10">
           <h1 className="text-3xl font-bold py-10 text-center">Sign Up</h1>
           <form
@@ -94,9 +94,9 @@ const SignUp: React.FC<PersonalInfoProps> = ({
 
             <span className="text-center">
               Already have an account?{" "}
-              <Link to={"/login"} className="text-blue-main">
+              <span className="text-link-color font-bold"><Link to={"/login"}>
                 Login
-              </Link>
+              </Link></span>
             </span>
           </form>
         </div>
